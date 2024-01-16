@@ -4,7 +4,7 @@
   import Seo from '$lib/components/Seo.svelte';
   import Stack from '$lib/components/Stack.svelte';
 
-  export let data;
+  // export let data;
 </script>
 
 <Seo title="UI Experiments" />

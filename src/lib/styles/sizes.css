@@ -1,0 +1,64 @@
+:root {
+  /* SIZE PRIMITIVES */
+  --s-0: 0px;
+  --s-0-5: 2px;
+  --s-1: 4px;
+  --s-1-5: 6px;
+  --s-2: 8px;
+  --s-2-5: 10px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 20px;
+  --s-6: 24px;
+  --s-8: 32px;
+  --s-10: 40px;
+  --s-12: 48px;
+  --s-16: 64px;
+  --s-20: 80px;
+  --s-24: 96px;
+  --s-32: 128px;
+  --s-40: 160px;
+  --s-48: 192px;
+  --s-56: 224px;
+  --s-64: 256px;
+  --s-80: 320px;
+  --s-85: 340px;
+  --s-96: 384px;
+  --s-100: 400px;
+  --s-120: 480px;
+  --s-140: 560px;
+  --s-160: 640px;
+  --s-180: 720px;
+  --s-192: 768px;
+  --s-256: 1024px;
+  --s-320: 1280px;
+  --s-360: 1440px;
+
+  /* SIZE ALIASES */
+  --width-xxs: var(--s-80);
+  --width-xs: var(--s-96);
+  --width-sm: var(--s-120);
+  --width-md: var(--s-140);
+  --width-lg: var(--s-160);
+  --width-xl: var(--s-192);
+  --width-2xl: var(--s-256);
+  --width-3xl: var(--s-320);
+  --width-4xl: var(--s-360);
+
+  --paragraph-max-width: var(--s-180);
+  --measure: 60ch;
+  --container-width: clamp(16rem, 95vw, 1216px);
+
+  /* Radius */
+  --radius-none: 0px;
+  --radius-xxs: var(--s-0-5);
+  --radius-xs: var(--s-1);
+  --radius-sm: var(--s-1-5);
+  --radius-md: var(--s-2);
+  --radius-lg: var(--s-3);
+  --radius-xl: var(--s-4);
+  --radius-2xl: var(--s-5);
+  --radius-3xl: var(--s-6);
+  --radius-full: 9999px;
+  --radius-circle: 50%;
+}

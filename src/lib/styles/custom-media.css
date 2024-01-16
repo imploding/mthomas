@@ -1,0 +1,11 @@
+/* Breakpoints */
+@custom-media --min-baby (min-width: 480px);
+@custom-media --max-baby (max-width: 480px);
+@custom-media --min-mama (min-width: 769px);
+@custom-media --max-mama (max-width: 768px);
+@custom-media --min-papa (min-width: 1000px);
+@custom-media --max-papa (max-width: 1000px);
+@custom-media --min-mega (min-width: 1300px);
+@custom-media --max-mega (max-width: 1300px);
+@custom-media --min-giga (min-width: 1700px);
+@custom-media --max-giga (max-width: 1700px);
