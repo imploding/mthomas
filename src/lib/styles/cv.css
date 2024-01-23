@@ -334,7 +334,7 @@ html {
     padding: 10vw var(--spacing-l) 10vw;
   }
 
-  a {
+  a, span {
     transition: 0.2s ease all;
 
     &:hover {

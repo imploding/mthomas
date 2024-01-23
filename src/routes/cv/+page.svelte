@@ -1,11 +1,13 @@
 <script>
   /** @type {import('./$types').PageData} */
   import { browser } from '$app/environment';
+  import { fade } from 'svelte/transition';
+  import { circOut } from 'svelte/easing';
+  import { clickoutside } from '@svelte-put/clickoutside';
 
   import Seo from '$lib/components/Seo.svelte';
 
-  // export let data;
-
+  // Scrolling Indicator
   if (browser) {
     window.addEventListener('scroll', function () {
       let totalHeight = document.body.scrollHeight - window.innerHeight;
@@ -35,8 +37,25 @@
     });
   }
 
+  // Toggle Background
   let generalist = false;
-  let activePhoto = '';
+
+  let isGeneralist = () => {
+    generalist = !generalist;
+  };
+
+  // Show Photos
+  let activePhoto = 'photo0';
+
+  function showPhoto(event) {
+    event.preventDefault();
+    activePhoto = `photo${event.target.dataset.photo}`;
+    console.log(activePhoto);
+  }
+
+  function resetPhoto() {
+    activePhoto = 'photo0';
+  }
 </script>
 
 <Seo title="Matt Thomas | Software Designer" />
@@ -44,7 +63,7 @@
 <meta name="theme-color" content="#F3E9E6" media="(prefers-color-scheme: light)" />
 <meta name="theme-color" content="#F3E9E6" media="(prefers-color-scheme: dark)" />
 
-<div class="cv {generalist ? 'cv--generalist' : ''}">
+<div class="cv" class:cv--generalist={generalist}>
   <div class="cv__bg"></div>
 
   <nav class="cv__nav">
@@ -55,7 +74,7 @@
   </nav>
 
   <article id="letter" class="letter {activePhoto}">
-    <div class="resume__container">
+    <div class="resume__container" transition:fade>
       <picture class="portrait">
         <source srcset="/images/matt.webp" type="image/webp" />
         <source srcset="/images/matt.jpg" type="image/jpeg" />
@@ -77,10 +96,9 @@
       </p>
 
       <p>
-        Always looking to understand the bigger picture, my role has evolved from that of a <a
-          href="#"
-          on:click={() => generalist == false}>specialist</a
-        >, to a <a href="#" on:click={() => generalist == false}>generalist</a> in recent years.
+        Always looking to understand the bigger picture, my role has evolved from that of a
+        <a href="#" on:click|preventDefault={isGeneralist}>specialist</a>, to a
+        <a href="#" on:click|preventDefault={isGeneralist}>generalist</a> in recent years.
       </p>
 
       <p>
@@ -96,29 +114,49 @@
 
       <!-- Turn photos into tryptych of Ocean, Mountain stars and Misty Fisherman -->
       <p>
-        In my logged off hours I enjoy building wonky furniture, sitting down at the drum kit, or <a
-          href="#"
-          x-on:click.prevent="photo1 = ! photo1"
-          x-on:click.outside.prevent="photo1 = false">simply</a>
-        <a href="#" x-on:click.prevent="photo2 = ! photo2" x-on:click.outside.prevent="photo2 = false">taking</a>
-        <a href="#" x-on:click.prevent="photo3 = ! photo3" x-on:click.outside.prevent="photo3 = false">photographs</a>.
+        In my logged off hours I enjoy building wonky furniture, sitting down at the drum kit, or
+        <a href="#" data-photo="1" on:click={showPhoto}>simply</a>
+        <a href="#" data-photo="2" on:click={showPhoto}>taking</a>
+        <a href="#" data-photo="3" on:click={showPhoto}>photographs</a>.
       </p>
 
-      <picture class="letter__photo" x-show="photo1" x-transition.opacity.duration.400ms>
-        <source srcset="/images/photos/splash.webp" type="image/webp" />
-        <source srcset="/images/photos/splash.jpg" type="image/jpeg" />
-        <img src="/images/photos/splash.jpg" alt="Splash at Second Valley, SA" loading="lazy" />
-      </picture>
-      <picture class="letter__photo" x-show="photo2" x-transition.opacity.duration.400ms>
-        <source srcset="/images/photos/mountain.webp" type="image/webp" />
-        <source srcset="/images/photos/mountain.jpg" type="image/jpeg" />
-        <img src="/images/photos/mountain.jpg" alt="Mt. Cook in New Zealand" loading="lazy" />
-      </picture>
-      <picture class="letter__photo" x-show="photo3" x-transition.opacity.duration.400ms>
-        <source srcset="/images/photos/flower.webp" type="image/webp" />
-        <source srcset="/images/photos/flower.jpg" type="image/jpeg" />
-        <img src="/images/photos/flower.jpg" alt="Blooming flower in Auckland, NZ" loading="lazy" />
-      </picture>
+      {#if activePhoto == 'photo1'}
+        <picture
+          class="letter__photo"
+          in:fade={{ delay: 50, duration: 1500, easing: circOut }}
+          out:fade={{ duration: 150 }}
+          on:click={resetPhoto}
+          use:clickoutside
+          on:clickoutside={resetPhoto}>
+          <source srcset="/images/photos/splash.webp" type="image/webp" />
+          <source srcset="/images/photos/splash.jpg" type="image/jpeg" />
+          <img src="/images/photos/splash.jpg" alt="Splash at Second Valley, SA" loading="lazy" />
+        </picture>
+      {:else if activePhoto == 'photo2'}
+        <picture
+          class="letter__photo"
+          in:fade={{ delay: 50, duration: 1500, easing: circOut }}
+          out:fade={{ duration: 150 }}
+          on:click={resetPhoto}
+          use:clickoutside
+          on:clickoutside={resetPhoto}>
+          <source srcset="/images/photos/mountain.webp" type="image/webp" />
+          <source srcset="/images/photos/mountain.jpg" type="image/jpeg" />
+          <img src="/images/photos/mountain.jpg" alt="Mt. Cook in New Zealand" loading="lazy" />
+        </picture>
+      {:else if activePhoto == 'photo3'}
+        <picture
+          class="letter__photo"
+          in:fade={{ delay: 50, duration: 1500, easing: circOut }}
+          out:fade={{ duration: 150 }}
+          on:click={resetPhoto}
+          use:clickoutside
+          on:clickoutside={resetPhoto}>
+          <source srcset="/images/photos/flower.webp" type="image/webp" />
+          <source srcset="/images/photos/flower.jpg" type="image/jpeg" />
+          <img src="/images/photos/flower.jpg" alt="Blooming flower in Auckland, NZ" loading="lazy" />
+        </picture>
+      {/if}
     </div>
   </article>
 
